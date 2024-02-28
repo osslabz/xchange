@@ -348,7 +348,7 @@
 			<version>${project.version}</version>
 		</dependency>
         <dependency>
-            <groupId>org.knowm.xchange</groupId>
+            <groupId>net.osslabz</groupId>
             <artifactId>xchange-enigma</artifactId>
             <version>${project.version}</version>
         </dependency>

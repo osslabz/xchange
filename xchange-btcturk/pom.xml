@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>xchange-parent</artifactId>
-        <groupId>org.knowm.xchange</groupId>
+        <groupId>net.osslabz</groupId>
         <version>5.1.2-SNAPSHOT</version>
     </parent>
 
@@ -35,7 +35,7 @@
     <!-- Parent provides default configuration for dependencies -->
     <dependencies>
         <dependency>
-            <groupId>org.knowm.xchange</groupId>
+            <groupId>net.osslabz</groupId>
             <artifactId>xchange-core</artifactId>
             <version>${project.version}</version>
         </dependency>

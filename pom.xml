@@ -7,7 +7,7 @@
     <maven>3.0</maven>
   </prerequisites>
 
-  <groupId>org.knowm.xchange</groupId>
+  <groupId>net.osslabz</groupId>
   <artifactId>xchange-parent</artifactId>
   <version>5.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -480,6 +480,45 @@
         </plugins>
       </build>
     </profile>
+
+      <profile>
+        <id>codelabz-release</id>
+        <build>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>3.3.0</version>
+              <executions>
+                <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                    <goal>jar-no-fork</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>3.6.3</version>
+              <executions>
+                <execution>
+                  <id>attach-javadocs</id>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                  <configuration>
+                    <doclint>none</doclint>
+                    <failOnError>false</failOnError>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </build>
+      </profile>
+
   </profiles>
 
   <build>
