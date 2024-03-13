@@ -92,6 +92,7 @@ public class KrakenStreamingService extends JsonNettyStreamingService {
                 .getExchangeSpecification()
                 .getExchangeSpecificParametersItem(WEBSOCKET_REQUESTS_PER_SECOND);
     if (requestsPerSecond != null) {
+      LOG.info("RateLimiter enabled with {} requests/seconds", requestsPerSecond);
       // N messages per second
       rateLimiter =
           RateLimiter.of(
@@ -171,7 +172,7 @@ public class KrakenStreamingService extends JsonNettyStreamingService {
             Integer channelId = statusMessage.getChannelID();
             switch (statusMessage.getStatus()) {
               case subscribed:
-                LOG.info("Channel name={}, id={} has been subscribed", channelName, channelId);
+                LOG.debug("Channel name={}, id={} has been subscribed", channelName, channelId);
 
                 if (channelId != null) {
                   channels.put(channelId, channelName);
@@ -179,7 +180,7 @@ public class KrakenStreamingService extends JsonNettyStreamingService {
 
                 break;
               case unsubscribed:
-                LOG.info("Channel name={}, id={} has been unsubscribed", channelName, channelId);
+                LOG.debug("Channel name={}, id={} has been unsubscribed", channelName, channelId);
                 channels.remove(channelId);
                 break;
               case error:

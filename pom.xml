@@ -11,7 +11,7 @@
 
   <groupId>net.osslabz</groupId>
   <artifactId>xchange-parent</artifactId>
-  <version>5.1.2.2</version>
+  <version>5.1.2.4</version>
   <packaging>pom</packaging>
 
   <name>XChange</name>
@@ -357,7 +357,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-all</artifactId>
-        <version>4.1.96.Final</version>
+        <version>4.1.107.Final</version>
       </dependency>
 
     </dependencies>

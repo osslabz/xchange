@@ -15,14 +15,18 @@ import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketHandshakeException;
 import io.netty.util.CharsetUtil;
+import java.net.SocketException;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> {
+
   private static final Logger LOG = LoggerFactory.getLogger(WebSocketClientHandler.class);
   private final StringBuilder currentMessage = new StringBuilder();
 
   public interface WebSocketMessageHandler {
+
     public void onMessage(String message);
   }
 
@@ -114,12 +118,22 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-    LOG.error(
-        "WebSocket client {} encountered exception ({} - {}). Closing",
-        ctx.channel(),
-        cause.getClass().getSimpleName(),
-        cause.getMessage(),
-        cause);
+
+    if (Objects.equals(SocketException.class, cause.getClass())
+        && "Connection reset".equalsIgnoreCase(cause.getMessage())) {
+      LOG.error(
+          "WebSocket client {} encountered exception ({} - {}). Closing",
+          ctx.channel(),
+          cause.getClass().getSimpleName(),
+          cause.getMessage());
+    } else {
+      LOG.error(
+          "WebSocket client {} encountered exception ({} - {}). Closing",
+          ctx.channel(),
+          cause.getClass().getSimpleName(),
+          cause.getMessage(),
+          cause);
+    }
     if (!handshakeFuture.isDone()) {
       handshakeFuture.setFailure(cause);
     }
