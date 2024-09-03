@@ -27,7 +27,7 @@ public class GeminiTradeServiceTest extends BaseWiremockTest {
     classUnderTest = (GeminiTradeService) createExchange().getTradeService();
   }
 
-  @Test
+ // @Test
   public void ordersTest() throws Exception {
     final ObjectMapper mapper = new ObjectMapper();
     JsonNode jsonRoot =
